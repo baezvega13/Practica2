@@ -16,7 +16,7 @@
     <artifactId>ProyectoAdictiva</artifactId>
     <version>1.0.0</version>
     <name>La Adictiva Bakery</name>
-    <description>Proyecto web para La Adictiva Bakery sin login</description>
+    <description>Proyecto web para La Adictiva Bakery </description>
     <packaging>jar</packaging>
 
     <properties>
