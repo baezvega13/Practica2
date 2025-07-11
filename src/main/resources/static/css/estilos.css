@@ -1,0 +1,112 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    font-family: sans-serif;
+    background: #fdfdfd;
+    overflow-x: hidden;
+}
+
+.frame {
+    position: relative;
+    width: 1024px;
+    height: 1440px;
+    margin: 0 auto;
+    background: transparent;
+    background-image: url('/img/Principal.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.banner {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 1024px;
+    height: 264px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #0f1724;
+    z-index: 2;
+}
+
+.content-background {
+    position: absolute;
+    top: 357px;
+    left: 207px;
+    width: 618px;
+    height: 876px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.button {
+    position: absolute;
+    width: 531px;
+    height: 155px;
+    background: rgba(15, 23, 36, 0.8);
+    border: 2px solid #fff;
+    border-radius: 20px;
+    color: white;
+    font-size: 35px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 155px;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 3;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover {
+    background: rgba(15, 23, 36, 1);
+}
+
+.btn-catalogo {
+    top: 432px;
+    left: 251px;
+}
+
+.btn-sobre-nosotros {
+    top: 713px;
+    left: 248px;
+}
+
+.btn-faq {
+    top: 994px;
+    left: 248px;
+}
+
+.footer-529907495725 {
+    position: fixed; 
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 1024px; 
+    height: 99px;
+    background: #0f1724;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    user-select: none;
+}
+
+.footer-content p {
+    margin: 4px 0;
+    width: 100%;
+}

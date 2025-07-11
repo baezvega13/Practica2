@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/faqestilos.css}">
+</head>
+<body>
+    <div class="faq-page-container">
+
+        <div th:insert="~{faq/fragmentos :: banner}"></div>
+        <div th:insert="~{faq/fragmentos :: regresar}"></div>
+
+        <div class="faq-content-wrapper">
+            <h1 class="faq-main-title"></h1>
+
+            <div class="faq-list-container">
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Hacen pasteles personalizados por encargo?</h2>
+                    </div>
+                    <p class="faq-answer">Sí, realizamos pasteles personalizados para cumpleaños, bodas y eventos especiales. Podés escribirnos por redes sociales o llamarnos al 8467-9524 para coordinar tu pedido.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Con cuánto tiempo de anticipación debo hacer un pedido especial?</h2>
+                    </div>
+                    <p class="faq-answer">Para pasteles personalizados o pedidos grandes, recomendamos hacer la solicitud con al menos 3 días de anticipación.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Tienen opciones sin azúcar o sin gluten?</h2>
+                    </div>
+                    <p class="faq-answer">Sí, contamos con una línea limitada de productos sin azúcar y sin gluten. Te sugerimos consultarnos por disponibilidad antes de tu visita.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Aceptan pagos con tarjeta o solo efectivo?</h2>
+                    </div>
+                    <p class="faq-answer">Aceptamos pagos en efectivo, con tarjeta y por Sinpe Móvil. Queremos que tu experiencia sea lo más cómoda posible.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Puedo hacer mi pedido por redes sociales?</h2>
+                    </div>
+                    <p class="faq-answer">Sí, podés escribirnos por Facebook o Instagram. Respondemos rápidamente y te confirmamos tu pedido por ese medio.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question-box">
+                        <h2 class="faq-question">¿Dónde están ubicados exactamente?</h2>
+                    </div>
+                    <p class="faq-answer">Podés encontrarnos fácilmente en Waze como “La Adictiva Pastelería”. También podés ver el mapa en nuestra sección de Ubicación.</p>
+                </div>
+            </div>
+
+            <div class="faq-info-box">
+                <p class="faq-info-text">Estas son solo algunas de las preguntas más frecuentes que recibimos por redes sociales. No dudes en escribirnos o comentar tus dudas: estamos para ayudarte.</p>
+                <p class="faq-info-text">Actualizamos esta sección cada mes para incluir nuevas consultas y ofrecerte siempre la mejor información posible.</p>
+            </div>
+
+        </div>
+        <div th:insert="~{faq/fragmentos :: footer}"></div>
+    </div>
+</body>
+</html>
