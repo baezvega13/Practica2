@@ -19,9 +19,9 @@ public class IndexController {
     }
 
     @GetMapping("/catalogo")
-    public String catalogo(Model model) {
-        model.addAttribute("productos", productoService.listarActivos());
-        return "catalogo";
+    public String catalogo() {
+        return "catalogo/catalogo";
+        
     }
 
     @GetMapping("/sobre-nosotros")

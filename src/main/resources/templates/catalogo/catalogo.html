@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>CATÁLOGO</title>
+    <link rel="stylesheet" th:href="@{/css/catalogo.css}" />
+</head>
+<body>
+    <div class="frame">
+        <div class="page-wrapper">
+
+            <header class="header-catalogo">
+                <div class="rectangle-encabezado"></div>
+                <div class="rectangle-detras-orden"></div>
+
+                <a th:href="@{/}" class="header-regresar">
+                    <span class="btn-regresar">
+                        <svg width="30.49" height="72.6" viewBox="0 0 30.49 72.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M29.625 65.5C28.75 66.3333 27.25 66.3333 26.5 65.5L0.875 39.95L0 39.125L0.875 38.3L26.5 12.75C27.25 11.9167 28.75 11.9167 29.625 12.75L30.5 13.625L14.75 39.125L30.5 64.625L29.625 65.5Z" fill="white"/>
+                        </svg>
+                    </span>
+                    <span>REGRESAR</span>
+                </a>
+
+                <h1 class="titulo-catalogo">CATÁLOGO</h1>
+                
+                <a th:href="@{/orden}" class="header-orden">
+                    <span class="icono-carrito">
+                        <svg width="68.34" height="61.54" viewBox="0 0 68.34 61.54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M68.34 11.51H54.08V7.91C54.08 3.54 50.41 0 45.98 0C41.55 0 37.88 3.54 37.88 7.91V11.51H32.61V7.91C32.61 3.54 28.94 0 24.51 0C20.08 0 16.41 3.54 16.41 7.91V11.51H0L6.87 61.54H61.47L68.34 11.51ZM21.94 7.91C21.94 5.92 23.51 4.3 25.43 4.3C27.35 4.3 28.92 5.92 28.92 7.91V11.51H21.94V7.91ZM40.94 7.91C40.94 5.92 42.51 4.3 44.43 4.3C46.35 4.3 47.92 5.92 47.92 7.91V11.51H40.94V7.91ZM58.91 14.86H40.09V18.46H47.07C47.07 18.46 47.07 18.46 47.07 18.46C48.06 18.46 48.86 19.23 48.86 20.18C48.86 21.13 48.06 21.9 47.07 21.9H40.09V25.5H47.07C47.07 25.5 47.07 25.5 47.07 25.5C48.06 25.5 48.86 26.27 48.86 27.22C48.86 28.17 48.06 28.94 47.07 28.94H40.09V32.54H58.91V14.86Z" fill="white"/>
+                    </svg>
+                </span>
+                <span>ORDEN</span>
+            </a>
+            </header>
+            <!-- FIN HEADER -->
+
+            <div th:replace="~{catalogo/fragmentos :: filtroBusqueda}"></div>
+
+            <main class="main-catalogo">
+                <div class="categorias-grid">
+                    <a href="/catalogo/panaderia" class="categoria-item categoria-panaderia">
+                        <h2>PANADERIA</h2>
+                    </a>
+                    <a href="/catalogo/reposteria" class="categoria-item categoria-reposteria">
+                        <h2>REPOSTERIA</h2>
+                    </a>
+                    <a href="/catalogo/todos" class="categoria-item categoria-todos">
+                        <h2>TODOS</h2>
+                    </a>
+                </div>
+            </main>
+
+            <div th:insert="~{catalogo/fragmentos :: footer}"></div>
+        </div>
+    </div>
+</body>
+</html>
+

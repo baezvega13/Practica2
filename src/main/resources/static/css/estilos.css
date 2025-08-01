@@ -86,7 +86,7 @@ html, body {
 
 .footer-529907495725 {
     position: absolute;  
-    left: 50.4%;
+    left: 50%;
     transform: translateX(-50%);  
     bottom: 0; 
     width: 1024px;  
@@ -111,3 +111,5 @@ html, body {
     margin: 4px 0;
     width: 100%;
 }
+
+

@@ -145,7 +145,7 @@ body {
 
 .footer-529907495725 {
     position: absolute;  
-    left: 50.4%;
+    left: 50%;
     transform: translateX(-50%);  
     bottom: 0; 
     width: 1024px;  
@@ -277,6 +277,7 @@ body {
     width: 823px; 
     padding: 20px 30px; 
     margin-top: 30px; 
+    margin-bottom: 90px; 
     text-align: center; 
     box-sizing: border-box; 
 }

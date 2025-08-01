@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+
+        <header th:fragment="headerCatalogo" class="header-catalogo">
+            <div class="rectangle-encabezado"></div>
+            <div class="rectangle-detras-orden"></div>
+
+            <a th:href="@{/}" class="header-regresar">
+                <span class="btn-regresar">
+                    <svg width="30.49" height="72.6" viewBox="0 0 30.49 72.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M29.625 65.5C28.75 66.3333 27.25 66.3333 26.5 65.5L0.875 39.95L0 39.125L0.875 38.3L26.5 12.75C27.25 11.9167 28.75 11.9167 29.625 12.75L30.5 13.625L14.75 39.125L30.5 64.625L29.625 65.5Z" fill="white"/>
+                    </svg>
+                </span>
+                <span>REGRESAR</span>
+            </a>
+
+            <h1 class="titulo-catalogo">CATÁLOGO</h1>
+            
+            <a th:href="@{/orden}" class="header-orden">
+                <span class="icono-carrito">
+                    <svg width="68.34" height="61.54" viewBox="0 0 68.34 61.54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M68.34 11.51H54.08V7.91C54.08 3.54 50.41 0 45.98 0C41.55 0 37.88 3.54 37.88 7.91V11.51H32.61V7.91C32.61 3.54 28.94 0 24.51 0C20.08 0 16.41 3.54 16.41 7.91V11.51H0L6.87 61.54H61.47L68.34 11.51ZM21.94 7.91C21.94 5.92 23.51 4.3 25.43 4.3C27.35 4.3 28.92 5.92 28.92 7.91V11.51H21.94V7.91ZM40.94 7.91C40.94 5.92 42.51 4.3 44.43 4.3C46.35 4.3 47.92 5.92 47.92 7.91V11.51H40.94V7.91ZM58.91 14.86H40.09V18.46H47.07C47.07 18.46 47.07 18.46 47.07 18.46C48.06 18.46 48.86 19.23 48.86 20.18C48.86 21.13 48.06 21.9 47.07 21.9H40.09V25.5H47.07C47.07 25.5 47.07 25.5 47.07 25.5C48.06 25.5 48.86 26.27 48.86 27.22C48.86 28.17 48.06 28.94 47.07 28.94H40.09V32.54H58.91V14.86Z" fill="white"/>
+                    </svg>
+                </span>
+                <span>ORDEN</span>
+            </a>
+        </header>
+
+        <div th:fragment="filtroBusqueda" class="filtro-busqueda">
+            <input type="text" placeholder="Filtrar búsqueda" class="search-input">
+            <div class="search-button-container">
+                <svg width="61" height="61" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19ZM11 17C7.68629 17 5 14.3137 5 11C5 7.68629 7.68629 5 11 5C14.3137 5 17 7.68629 17 11C17 14.3137 14.3137 17 11 17ZM21 21L16.5 16.5" stroke="#FBF0D5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+        <div th:fragment="footer">
+            <footer class="site-footer">
+                <div class="footer-contenido p">
+                    <p>Facebook: La Adictiva Pastelería Instagram: la_adictiva_pasteleria Teléfono: 8467-9524 Waze: La Adictiva Pastelería</p>
+                    <p>Horario: Lunes a sábado: 6:00 a.m. – 6:00 p.m. | Domingo: 7:00 a.m. – 5:00 p.m.</p>
+                    <p>© 2025 La Adictiva Pastelería. Todos los derechos reservados.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
