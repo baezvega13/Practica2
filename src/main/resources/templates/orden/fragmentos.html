@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:fragment="headerOrden(titulo, backUrl)" class="header-panaderia">
+        <div class="rectangle-encabezado"></div>
+        <a th:href="${backUrl}" class="header-regresar">
+            <span class="btn-regresar">
+                <svg width="30.49" height="72.6" viewBox="0 0 30.49 72.6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.625 65.5C28.75 66.3333 27.25 66.3333 26.5 65.5L0.875 39.95L0 39.125L0.875 38.3L26.5 12.75C27.25 11.9167 28.75 11.9167 29.625 12.75L30.5 13.625L14.75 39.125L30.5 64.625L29.625 65.5Z" fill="white"/>
+                </svg>
+            </span>
+            <span>REGRESAR</span>
+        </a>
+        <h1 class="titulo-panaderia" th:text="${titulo}"></h1>
+        </header>
+    <footer th:fragment="footerOrden" class="site-footer">
+        <div class="footer-contenido">
+            <p>Facebook: La Adictiva Pastelería Instagram: la_adictiva_pasteleria Teléfono: 8467-9524 Waze: La Adictiva Pastelería</p>
+            <p>Horario: Lunes a sábado: 6:00 a.m. – 6:00 p.m. | Domingo: 7:00 a.m. – 5:00 p.m.</p>
+            <p>© 2025 La Adictiva Pastelería. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

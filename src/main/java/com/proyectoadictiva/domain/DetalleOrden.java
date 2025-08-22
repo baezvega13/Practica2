@@ -13,17 +13,22 @@ public class DetalleOrden implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDetalle;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idOrden")
+    @JoinColumn(name = "orden_id") 
     private Orden orden;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "producto_id") 
     private Producto producto;
 
     private int cantidad;
+    
+    @Column(name = "precio_unitario")
     private double precioUnitario;
-    private double totalProducto;
+    
+    @Column(name = "subtotal")
+    private double subtotal; // 
 }

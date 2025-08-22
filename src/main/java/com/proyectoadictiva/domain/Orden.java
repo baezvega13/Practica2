@@ -15,11 +15,15 @@ public class Orden implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idOrden;
+    @Column(name = "id") 
+    private Long id; 
 
-    private String codigoRetiro;         // Código único para retiro
-    private LocalDateTime fecha;         // Fecha del pedido
-    private double total;                // Total de la orden
+    @Column(name = "codigo_retiro")
+    private String codigoRetiro;
+
+    private LocalDateTime fecha;
+
+    private double total;
 
     @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL)
     private List<DetalleOrden> detalles;

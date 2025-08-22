@@ -1,3 +1,4 @@
+/* Importar Fuentes */
 @font-face {
   font-family: 'Tai Heritage Pro';
   font-style: normal;
@@ -45,6 +46,7 @@
   --color-fondo-main-overlay: #ffffff80;
 }
 
+/* Estilos Base */
 html, body {
   margin: 0;
   padding: 0;
@@ -75,6 +77,7 @@ html, body {
   align-items: center;
 }
 
+/* Estilos del Header - Unificados con itemstodo.css */
 .header-catalogo {
   position: relative;
   display: flex;
@@ -88,8 +91,8 @@ html, body {
   z-index: 100;
 }
 
-
-.rectangle-encabezado, .rectangle-detras-orden {
+.rectangle-encabezado,
+.rectangle-detras-orden {
   position: absolute;
   top: 0;
   width: 160px;
@@ -98,20 +101,16 @@ html, body {
   z-index: 0;
 }
 
-.rectangle-encabezado {
-  left: 0;
-}
+.rectangle-encabezado { left: 0; }
+.rectangle-detras-orden { right: 0; }
 
-.rectangle-detras-orden {
-  right: 0;
-}
-
-.header-regresar, .header-orden {
+.header-regresar,
+.header-orden {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
+  justify-content: center; /* Mantenido de itemstodo.css */
+  gap: 5px; /* Mantenido de itemstodo.css */
   font-family: 'Tai Heritage Pro', sans-serif;
   font-size: 20px;
   color: var(--color-resalte);
@@ -125,37 +124,45 @@ html, body {
   text-align: center;
 }
 
-.header-regresar .btn-regresar, .header-orden .icono-carrito {
+.header-regresar .btn-regresar,
+.header-orden .icono-carrito {
   color: var(--color-resalte);
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  display: flex; /* Asegura que el SVG esté dentro del span */
+  align-items: center; /* Centra el SVG verticalmente dentro del span */
+  justify-content: center; /* Centra el SVG horizontalmente dentro del span */
+  padding: 0; /* Asegura que no haya padding extra */
+  margin: 0; /* Asegura que no haya margin extra */
 }
 
 .header-regresar .btn-regresar svg {
   fill: var(--color-resalte);
-  width: 30.49px;
-  height: 72.6px;
+  width: 30.49px; /* COPIADO EXACTAMENTE DE HTML/itemstodo.css */
+  height: 72.6px; /* COPIADO EXACTAMENTE DE HTML/itemstodo.css */
+  margin: 0; /* Asegura que no tenga márgenes */
+  padding: 0; /* Asegura que no tenga paddings */
 }
 
 .header-orden .icono-carrito svg {
   fill: var(--color-resalte);
-  width: 68.34px;
-  height: 61.54px;
+  width: 68.34px; /* COPIADO EXACTAMENTE DE HTML/itemstodo.css */
+  height: 61.54px; /* COPIADO EXACTAMENTE DE HTML/itemstodo.css */
+  margin: 0; /* Asegura que no tenga márgenes */
+  padding: 0; /* Asegura que no tenga paddings */
 }
 
 .titulo-catalogo {
-  margin: 0;
-  flex-grow: 1;
+  margin: 0; /* Removido 'auto' para que flexbox lo controle */
+  flex-grow: 1; /* Ocupa el espacio restante */
   font-size: 50px;
   font-family: 'Tai Heritage Pro', sans-serif;
   color: var(--color-header-text);
-  text-align: center;
+  text-align: center; /* Centra el texto del título */
   z-index: 1;
-  align-self: center;
+  align-self: center; /* Centra el título verticalmente en el contenedor flex */
 }
 
-
+/* Estilos Corregidos para la Barra de Búsqueda */
 .filtro-busqueda {
   position: absolute;
   left: 76px;
@@ -170,6 +177,16 @@ html, body {
   justify-content: space-between;
   z-index: 2;
   overflow: hidden;
+  padding: 0;
+}
+
+.filtro-busqueda form {
+  display: flex;    /* Input y botón en línea */
+  width: 100%;      /* El formulario ocupa todo el ancho */
+  height: 100%;     /* El formulario ocupa toda la altura */
+  margin: 0;        /* Quitar márgenes por defecto */
+  padding: 0;       /* Quitar padding por defecto */
+  border: none;     /* Quitar borde por defecto */
 }
 
 .filtro-busqueda .search-input {
@@ -177,41 +194,53 @@ html, body {
   height: 100%;
   border: none;
   background: transparent;
-  color: var(--color-header-text);  
-  font-size: 3rem;  
+  color: var(--color-header-text);
+  font-size: 3rem;
   font-weight: 300;
   font-family: 'Tai Heritage Pro', sans-serif;
   padding: 0 20px;
   text-align: center;
+  box-sizing: border-box; /* Evita que el padding aumente el ancho */
 }
 
-
 .filtro-busqueda .search-input::placeholder {
-  color: rgba(250, 243, 217, 0.8);  
+  color: rgba(250, 243, 217, 0.8);
   opacity: 1;
 }
 
-.filtro-busqueda .search-button-container {
+.filtro-busqueda button.search-button-container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 137px;
-  height: 107px;
+  height: 100%; /* Ocupa toda la altura */
   background: #ffffff;
+  border: 1px solid #000000FF;
   border-radius: 0px 20px 20px 0px;
   cursor: pointer;
-  border: 1px solid #000000FF;
-}
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 
+  /* Reset estilos nativos */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background-color: transparent;
+  color: inherit;
+}
 
 .filtro-busqueda .search-button-container svg {
   width: 61px;
   height: 61px;
 }
+
 .filtro-busqueda .search-button-container svg path {
-  stroke: black;
+  stroke: black; /* Asegurado para ser visible */
 }
 
+/* Cuadrícula de Categorías */
 .categorias-grid {
   display: flex;
   flex-direction: column;
@@ -222,6 +251,7 @@ html, body {
   gap: 30px;
 }
 
+/* Elemento de Categoría Individual */
 .categoria-item {
   display: flex;
   justify-content: center;
@@ -240,6 +270,7 @@ html, body {
   overflow: hidden;
 }
 
+/* Capa de Superposición para Categoría */
 .categoria-item::before {
   content: "";
   position: absolute;
@@ -262,6 +293,7 @@ html, body {
   z-index: 2;
 }
 
+/* Estilos de Categoría Específicos */
 .categoria-panaderia {
   top: 120px;
   width: 1024px;
@@ -271,18 +303,19 @@ html, body {
 
 .categoria-reposteria {
   top: 660px;
-  width: 1042px;
+  width: 1024px;
   height: 523px;
   background-image: url('/img/Reposteria.jpeg');
 }
 
 .categoria-todos {
   top: 1200px;
-  width: 1042px;
+  width: 1024px;
   height: 523px;
   background-image: url('/img/Todos.jpg');
 }
 
+/* Pie de Página */
 .site-footer {
   width: 100%;
   background: #0f1724;

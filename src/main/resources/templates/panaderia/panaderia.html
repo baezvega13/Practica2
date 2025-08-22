@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PANADERÍA</title>
+        <link rel="stylesheet" th:href="@{/css/items.css}">
+        <script th:src="@{/js/cart-service.js}"></script>
+        <link rel="stylesheet" th:href="@{/css/search-bar.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" th:href="@{/css/detalle.css}">
+    </head>
+    <body>
+        <div class="frame">
+            <div class="page-wrapper">
+
+                <div th:replace="~{panaderia/fragmentos :: headerPanaderia(titulo='PANADERÍA', backUrl='/catalogo')}"></div>
+
+                <div class="filtro-busqueda">
+                    <form id="searchForm" action="#" method="get" onsubmit="event.preventDefault(); filterProducts(this.elements['query'].value);">
+                        <input type="text" name="query" id="searchInput" placeholder="Filtrar búsqueda" class="search-input">
+                        <button type="submit" class="search-button-container">
+                            <svg width="61" height="61" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19ZM11 17C7.68629 17 5 14.3137 5 11C5 7.68629 7.68629 5 11 5C14.3137 5 17 7.68629 17 11C17 14.3137 14.3137 17 11 17ZM21 21L16.5 16.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <main class="main-catalogo">
+                    <div id="productosContainer" class="productos-grid">
+                    </div>
+                </main>
+
+                <div th:replace="~{panaderia/fragmentos :: footerPanaderia}"></div>
+
+            </div>
+        </div>
+
+        <div id="productDetailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div class="product-detail-container">
+                    <div class="product-image-placeholder">
+                        <img id="modalProductImage" src="" alt="Imagen del Producto" class="product-detail-image" onerror="this.onerror=null;this.src='/img/placeholder.jpg';">
+                    </div>
+
+                    <h2 id="modalProductName" class="product-detail-name"></h2>
+
+                    <div class="product-detail-description">
+                        <p>Descripción breve del producto:</p>
+                        <p id="modalProductBriefDescription"></p>
+                        <p>Detalle:</p>
+                        <p id="modalProductDetail"></p>
+                        <p>Categoría: <span id="modalProductCategory"></span></p>
+                        <p>Disponibles: <span id="modalProductStock"></span></p>
+                    </div>
+
+                    <div class="product-detail-price">
+                        <p id="modalProductPrice"></p>
+                    </div>
+
+                    <div class="quantity-section">
+                        <button class="quantity-button minus-button" onclick="changeQuantity(-1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" id="quantityInput" class="quantity-display" value="1" min="1">
+                        <button class="quantity-button plus-button" onclick="changeQuantity(1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <button id="addToOrderModalButton" class="add-to-cart-button">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const allProducts = [
+                {id: 1, nombre: 'Panes Rústicos', categoria: 'Panadería', descripcion: 'Una selección de panes rústicos', detalle: 'Panes artesanales hechos con masa madre y horneados en piedra, perfectos para cualquier comida. Ingredientes: Harina, agua, sal, levadura. Preparación: Fermentación lenta y horneado en horno de piedra. Calorías: 250 kcal/100g.', precio: 1500.00, rutaImagen: 'pan 1.jpeg', stock: 10, activo: true},
+                {id: 2, nombre: 'Pan Redondo Artesanal', categoria: 'Panadería', descripcion: 'Crujiente y tradicional baguette', detalle: 'Pan francés clásico, crujiente por fuera y suave por dentro, ideal para sándwiches o para acompañar sopas y quesos. Ingredientes: Harina de trigo, agua, levadura, sal. Preparación: Amasado tradicional y cocción al vapor. Calorías: 280 kcal/100g.', precio: 1200.00, rutaImagen: 'pan 2.jpeg', stock: 15, activo: true},
+                {id: 3, nombre: 'Pan Artesanal Integral', categoria: 'Panadería', descripcion: 'Pan de barra suave y esponjoso', detalle: 'Pan de barra grande, ideal para toda la familia, con una corteza dorada y un interior suave. Ingredientes: Harina, leche, mantequilla, azúcar, levadura, sal. Preparación: Doble fermentación y horneado suave. Calorías: 260 kcal/100g.', precio: 2100.00, rutaImagen: 'pan 3.jpeg', stock: 8, activo: true},
+                {id: 4, nombre: 'Pan Barra Artesanal', categoria: 'Panadería', descripcion: 'Hecho a mano con los mejores ingredientes', detalle: 'Pan de campo con una corteza gruesa y una miga densa, lleno de sabor. Ingredientes: Harina integral, masa madre, agua, sal. Preparación: Larga fermentación natural. Calorías: 240 kcal/100g.', precio: 2500.00, rutaImagen: 'pan 4.jpeg', stock: 7, activo: true},
+                {id: 5, nombre: 'Rollos de pan', categoria: 'Panadería', descripcion: 'Pequeños y suaves rollos', detalle: 'Pequeños y suaves rollos, perfectos para cenas, bocadillos o para acompañar guisos. Ingredientes: Harina, huevo, leche, mantequilla, levadura. Preparación: Rellenos de queso y horneados hasta dorar. Calorías: 290 kcal/100g.', precio: 1800.00, rutaImagen: 'pan 5.jpeg', stock: 20, activo: true},
+                {id: 6, nombre: 'Pan de Viena', categoria: 'Panadería', descripcion: 'Pan de Viena, ligero y tierno', detalle: 'Con una textura delicada y un sabor ligeramente dulce, ideal para tostadas o sandwiches. Ingredientes: Harina, huevos, azúcar, leche, vainilla, levadura. Preparación: Masa enriquecida y horneado lento. Calorías: 310 kcal/100g.', precio: 1600.00, rutaImagen: 'pan 6.jpeg', stock: 12, activo: true},
+            ];
+
+            let currentProduct = null;
+            const currentCategory = 'Panadería';
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const initialProducts = allProducts.filter(product => product.categoria === currentCategory);
+                renderProducts(initialProducts);
+
+                const searchForm = document.getElementById('searchForm');
+                const searchInput = document.getElementById('searchInput');
+
+                if (searchForm && searchInput) {
+                    searchForm.addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        const query = searchInput.value.trim().toLowerCase();
+                        filterProducts(query);
+                    });
+                }
+
+                const modal = document.getElementById('productDetailModal');
+                const closeButton = document.getElementsByClassName('close-button')[0];
+                const addToOrderModalButton = document.getElementById('addToOrderModalButton');
+
+                closeButton.onclick = function () {
+                    modal.style.display = 'none';
+                }
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+
+                addToOrderModalButton.onclick = function () {
+                    const quantity = parseInt(document.getElementById('quantityInput').value);
+                    if (currentProduct && quantity > 0 && quantity <= currentProduct.stock) {
+                        addToOrder(currentProduct.id, currentProduct.nombre, currentProduct.precio, quantity);
+                        modal.style.display = 'none';
+                    } else if (quantity <= 0) {
+                        alert('Por favor, ingrese una cantidad válida (mayor que 0).');
+                    } else if (quantity > currentProduct.stock) {
+                        alert(`No hay suficiente stock. Disponibles: ${currentProduct.stock}`);
+                    }
+                }
+            });
+
+            function renderProducts(productsToRender) {
+                const container = document.getElementById('productosContainer');
+                container.innerHTML = '';
+
+                if (productsToRender.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; width: 100%; font-size: 1.5rem; color: #555;">No se encontraron productos en esta categoría.</p>';
+                    return;
+                }
+
+                productsToRender.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('producto-card');
+
+                    const imageUrl = product.rutaImagen ? `/img/${product.rutaImagen}` : '/img/placeholder.jpg';
+
+                    productCard.innerHTML = `
+                        <img src="${imageUrl}" alt="${product.nombre}" onerror="this.onerror=null;this.src='/img/placeholder.jpg';">
+                        <div class="producto-info">
+                            <h3>${product.nombre}</h3>
+                            <p>₡${product.precio.toLocaleString('es-CR', {minimumFractionDigits: 2})}</p>
+                            <div class="producto-actions">
+                                <button class="btn-ver-mas" data-product-id="${product.id}">Ver más</button>
+                                <button class="btn-añadir" data-product-id="${product.id}" data-product-name="${product.nombre}" data-product-price="${product.precio}" ${product.activo === false || product.stock <= 0 ? 'disabled' : ''}>${product.activo === false || product.stock <= 0 ? 'No Disponible' : 'Añadir'}</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(productCard);
+                });
+
+                document.querySelectorAll('.btn-ver-mas').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const productId = parseInt(this.dataset.productId);
+                        showProductDetails(productId);
+                    });
+                });
+
+                document.querySelectorAll('.btn-añadir').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const productId = parseInt(this.dataset.productId);
+                        const productName = this.dataset.productName;
+                        const productPrice = parseFloat(this.dataset.productPrice);
+                        const product = allProducts.find(p => p.id === productId);
+                        if (product && product.stock > 0 && product.activo) {
+                            addToOrder(product.id, product.nombre, product.precio, 1);
+                        } else {
+                            alert(`El producto "${productName}" no está disponible o no hay stock.`);
+                        }
+                    });
+                });
+            }
+
+            function filterProducts(query) {
+                const productsInCurrentCategory = allProducts.filter(product => product.categoria === currentCategory);
+                const filtered = productsInCurrentCategory.filter(product =>
+                    product.nombre.toLowerCase().includes(query) ||
+                            product.descripcion.toLowerCase().includes(query) ||
+                            product.detalle.toLowerCase().includes(query)
+                );
+                renderProducts(filtered);
+            }
+
+            function showProductDetails(productId) {
+                currentProduct = allProducts.find(p => p.id === productId);
+                if (currentProduct) {
+                    const imageUrl = currentProduct.rutaImagen ? `/img/${currentProduct.rutaImagen}` : '/img/placeholder.jpg';
+                    document.getElementById('modalProductImage').src = imageUrl;
+                    document.getElementById('modalProductImage').alt = currentProduct.nombre;
+                    document.getElementById('modalProductName').textContent = currentProduct.nombre;
+
+                    document.getElementById('modalProductBriefDescription').textContent = currentProduct.descripcion;
+                    document.getElementById('modalProductDetail').innerHTML = currentProduct.detalle ? currentProduct.detalle.split('. ').map(p => `<p>${p}.</p>`).join('') : '';
+
+                    document.getElementById('modalProductPrice').textContent = `₡${currentProduct.precio.toLocaleString('es-CR', {minimumFractionDigits: 2})}`;
+                    document.getElementById('modalProductCategory').textContent = currentProduct.categoria;
+
+                    const stockActual = currentProduct.activo === false ? 0 : (currentProduct.stock !== undefined ? currentProduct.stock : 10);
+                    document.getElementById('modalProductStock').textContent = currentProduct.activo === false ? 'No Disponible' : (currentProduct.stock !== undefined ? stockActual : 'N/A');
+
+                    document.getElementById('quantityInput').value = 1;
+                    document.getElementById('quantityInput').max = stockActual;
+
+                    const addToOrderBtn = document.getElementById('addToOrderModalButton');
+                    if (stockActual <= 0) {
+                        addToOrderBtn.disabled = true;
+                        addToOrderBtn.textContent = 'Sin Stock';
+                        addToOrderBtn.style.backgroundColor = '#6c757d';
+                    } else {
+                        addToOrderBtn.disabled = false;
+                        addToOrderBtn.textContent = 'Añadir';
+                        addToOrderBtn.style.backgroundColor = '#121621';
+                    }
+
+                    document.getElementById('productDetailModal').style.display = 'flex';
+                }
+            }
+
+            function changeQuantity(delta) {
+                const quantityInput = document.getElementById('quantityInput');
+                let currentQuantity = parseInt(quantityInput.value);
+                const maxStock = parseInt(quantityInput.max);
+
+                currentQuantity += delta;
+
+                if (currentQuantity < 1) {
+                    currentQuantity = 1;
+                }
+                if (currentQuantity > maxStock) {
+                    currentQuantity = maxStock;
+                    alert(`No puedes añadir más de ${maxStock} unidades.`);
+                }
+                quantityInput.value = currentQuantity;
+            }
+
+            function addToOrder(id, nombre, precio, cantidad) {
+                window.cart.add(id, nombre, precio, cantidad);
+                alert(`"${nombre}" x${cantidad} ha sido añadido a tu orden.`);
+
+                const productIndex = allProducts.findIndex(p => p.id === id);
+                if (productIndex !== -1) {
+                    allProducts[productIndex].stock -= cantidad;
+                    const productsToRender = allProducts.filter(product => product.categoria === currentCategory);
+                    renderProducts(productsToRender);
+                    if (currentProduct && currentProduct.id === id) {
+                        showProductDetails(id);
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

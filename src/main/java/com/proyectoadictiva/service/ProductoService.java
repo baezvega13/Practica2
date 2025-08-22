@@ -16,17 +16,32 @@ public class ProductoService {
     @Transactional(readOnly = true)
     public List<Producto> getProductos(boolean activos) {
         var lista = productoRepository.findAll();
-
         if (activos) {
             lista.removeIf(p -> !p.isActivo());
         }
-
         return lista;
     }
 
     @Transactional(readOnly = true)
     public Producto getProducto(Producto producto) {
-        return productoRepository.findById(producto.getId()).orElse(null); 
+        return productoRepository.findById(producto.getId()).orElse(null);
+    }
+    
+    @Transactional(readOnly = true)
+    public Producto buscarPorId(Long id) {
+        return productoRepository.findById(id).orElse(null);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Producto> getProductosPorCategoria(String categoria) {
+        return productoRepository.findByCategoria(categoria);
+    }
+    
+    
+    @Transactional(readOnly = true)
+    public List<Producto> getProductosPorBusqueda(String query) {
+        
+        return productoRepository.findByNombreContainingIgnoreCaseOrDescripcionContainingIgnoreCase(query, query);
     }
 
     @Transactional
@@ -35,22 +50,7 @@ public class ProductoService {
     }
 
     @Transactional
-    public boolean delete(Producto producto) {
-        try {
-            productoRepository.delete(producto);
-            productoRepository.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Transactional(readOnly = true)
-    public Producto buscarPorId(Long id) {
-        return productoRepository.findById(id).orElse(null);
-    }
-
-    public List<Producto> listarActivos() {
-        return getProductos(true);
+    public void delete(Producto producto) {
+        productoRepository.delete(producto);
     }
 }

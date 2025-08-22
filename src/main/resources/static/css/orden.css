@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Tai+Heritage+Pro&display=swap');
+
+:root {
+  --color-fondo-principal: #fdfdfd;
+  --color-texto-principal: #0f1724;
+  --color-resalte: #FBF0D5;
+  --color-header-bg: #121621;
+  --color-header-text: #FAF3D9;
+  --color-fondo-main-overlay: #ffffffCC;
+}
+
+/* Estilos Base */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: 'Tai Heritage Pro', sans-serif;
+  background: var(--color-fondo-principal);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  position: relative;
+  width: 1024px;
+  margin: 0 auto;
+  background: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url('/img/logotransparente.png');
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Encabezado */
+.header-panaderia {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 234px;
+  background: var(--color-header-bg);
+  color: var(--color-header-text);
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.rectangle-encabezado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 152px;
+  height: 234px;
+  background: #39414980;
+  z-index: 0;
+}
+
+.header-regresar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 20px;
+  color: var(--color-resalte);
+  text-decoration: none;
+  width: 152px;
+  height: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.header-regresar svg {
+  width: 30.49px;
+  height: 72.6px;
+  fill: var(--color-resalte);
+}
+
+.titulo-panaderia {
+  flex-grow: 1;
+  font-size: 50px;
+  font-family: 'Tai Heritage Pro', sans-serif;
+  color: var(--color-header-text);
+  text-align: center;
+  margin: 0;
+  z-index: 1;
+  align-self: center;
+}
+
+/* Contenido Principal y Específicos de la Orden */
+.order-container {
+    width: 997px;
+    background: var(--color-fondo-main-overlay);
+    border-radius: 0px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.order-header {
+    width: 927px;
+    height: 92px;
+    background: #121621CC;
+    border: 1px solid #fbf0d5FF;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    margin-bottom: 20px;
+}
+
+.order-header .header-product { grid-column: 2; }
+.order-header .header-quantity { grid-column: 3; }
+.order-header .header-price-unit { grid-column: 4; }
+.order-header .header-total { grid-column: 5; }
+
+.order-item {
+    width: 927px;
+    height: 73px;
+    display: grid;
+    grid-template-columns: 30px 198px 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+    color: #121621;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    font-size: 20px;
+}
+
+.trash-icon {
+    font-size: 30px;
+    color: #121621;
+    cursor: pointer;
+    grid-column: 1;
+    justify-self: center;
+}
+
+.order-item-product-name {
+    grid-column: 2;
+    text-align: left;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quantity-controls {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 25px;
+}
+
+.quantity-minus,
+.quantity-plus {
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.quantity-number {
+    font-size: 25px;
+}
+
+.price-per-unit {
+    grid-column: 4;
+    font-size: 20px;
+    text-align: center;
+}
+
+.total-price {
+    grid-column: 5;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* Resumen Total y Botones */
+.order-summary-total {
+    width: 319px;
+    height: 74px;
+    background: #121621E6;
+    border: 1px solid #faf3d966;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    color: #F5F5F5;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+.total-value {
+    background-color: white;
+    color: #121621;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.order-summary-actions {
+    width: 927px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.cancel-button,
+.confirm-button {
+    background-color: #121621E6;
+    color: #F5F5F5;
+    border: 1px solid #faf3d966;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    flex-grow: 1;
+    max-width: 319px;
+    text-align: center;
+}
+
+/* Footer */
+.site-footer {
+  width: 100%;
+  background: #0f1724;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  user-select: none;
+  margin-top: auto;
+  width: 1024px;
+  height: 99px;
+  z-index: 5;
+  position: relative;
+}
+
+.footer-contenido p {
+  margin: 4px 0;
+  width: 100%;
+}
+
+/* Estilos de la Modal */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-dialog {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-sizing: border-box;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: var(--color-texto-principal);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content-alert .modal-title {
+    font-size: 2.2rem;
+    color: var(--color-header-bg);
+    margin-bottom: 15px;
+}
+
+.modal-content-alert .modal-message {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-content-alert .modal-close-button {
+    background-color: var(--color-header-bg);
+    color: var(--color-header-text);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content-alert .modal-close-button:hover {
+    background-color: #394149;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

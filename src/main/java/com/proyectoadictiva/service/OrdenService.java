@@ -13,13 +13,7 @@ public class OrdenService {
     private OrdenRepository ordenRepository;
 
     @Transactional
-    public void save(Orden orden) {
-        ordenRepository.save(orden);
+    public Orden save(Orden orden) { 
+        return ordenRepository.save(orden);
     }
-
-    @Transactional
-    public void guardarOrden(Orden orden) {
-        ordenRepository.save(orden);
-    }
-
 }

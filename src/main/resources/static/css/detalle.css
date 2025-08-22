@@ -1,0 +1,369 @@
+/* Importar Fuentes y Variables Globales */
+@import url('https://fonts.googleapis.com/css2?family=Tai+Heritage+Pro&display=swap');
+/* @font-face rules omitted for brevity */
+
+:root {
+  --color-fondo-principal: #fdfdfd;
+  --color-texto-principal: #0f1724;
+  --color-resalte: #FBF0D5;
+  --color-header-bg: #121621;
+  --color-header-text: #FAF3D9;
+  --color-fondo-main-overlay: #ffffffCC;
+}
+
+/* Estilos específicos para la CUADRÍCULA DE PRODUCTOS (tarjetas dinámicas) */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos de la tarjeta de producto */
+.producto-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    min-height: 450px;
+    justify-content: space-between;
+    background-color: #fbf0d5B3;
+    position: relative;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos de la imagen del producto */
+.producto-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Estilos de la información del producto */
+.producto-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+/* Estilos del título del producto */
+.producto-info h3 {
+    font-size: 1.8rem;
+    color: var(--color-texto-principal);
+    margin: 0;
+}
+
+/* Estilos del precio del producto */
+.producto-info p {
+    font-size: 1.3rem;
+    color: #555;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Estilos de las acciones del producto (botones) */
+.producto-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+    gap: 10px;
+}
+
+/* Estilos generales de los botones de acción */
+.producto-actions button {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    background: #121621;
+    color: #fff;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    text-decoration: none;
+}
+
+/* Estilo del botón "Ver más" */
+.btn-ver-mas {
+    background-color: #007bff;
+}
+
+.btn-ver-mas:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del botón "Añadir" */
+.btn-añadir {
+    background-color: #28a745;
+}
+
+.btn-añadir:hover {
+    background-color: #218838;
+}
+
+/* Estilos de la Modal (detalle de producto) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos del contenido de la modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 997px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: var(--color-texto-principal);
+}
+
+/* Estilos del botón de cierre de la modal */
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 201;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Contenedor principal de los detalles del producto en la modal */
+.product-detail-main {
+    position: relative;
+    width: 100%;
+    min-height: 1108px;
+    background-color: var(--color-fondo-main-overlay);
+    box-sizing: border-box;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    flex-grow: 1;
+}
+
+/* Contenedor de los detalles del producto en la modal */
+.product-detail-container {
+    position: relative;
+    width: 100%;
+    max-width: 997px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Espacio para la imagen del producto en la modal */
+.product-image-placeholder {
+    width: 831px;
+    height: 554px;
+    background-color: #000000;
+    border: 1px solid #121621;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+/* Imagen del producto en la modal */
+.product-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Nombre del producto en la modal */
+.product-detail-name {
+    font-size: 50px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: #121621;
+    text-align: center;
+    margin: 0 0 20px 0;
+    width: 831px;
+}
+
+/* Descripción del producto en la modal */
+.product-detail-description {
+    font-size: 35px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: #121621;
+    text-align: center;
+    margin: 0 0 40px 0;
+    width: 831px;
+    line-height: 1.2;
+}
+
+/* Párrafos dentro de la descripción */
+.product-detail-description p {
+    margin: 5px 0;
+}
+
+/* Precio del producto en la modal */
+.product-detail-price {
+    font-size: 50px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: #121621;
+    text-align: center;
+    margin: 0 0 40px 0;
+    width: 831px;
+}
+
+/* Sección de cantidad en la modal */
+.quantity-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    width: 254px;
+    height: 77px;
+    background: #FFFFFF;
+    border: 2px solid #121621;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+/* Botones de cantidad */
+.quantity-button {
+    background: #121621;
+    color: white;
+    border: none;
+    width: 70px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-button:hover {
+    background-color: #394149;
+}
+
+/* Campo de visualización de cantidad */
+.quantity-display {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: #000000;
+    border: none;
+    background: transparent;
+    -moz-appearance: textfield;
+}
+
+/* Oculta los controles de spin en navegadores WebKit (Chrome, Safari) */
+.quantity-display::-webkit-outer-spin-button,
+.quantity-display::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Botón de restar cantidad */
+.minus-button {
+    border-radius: 30px 0 0 30px;
+}
+
+/* Botón de sumar cantidad */
+.plus-button {
+    border-radius: 0 30px 30px 0;
+}
+
+/* Botón "Añadir al carrito" en la modal */
+.add-to-cart-button {
+    width: 254px;
+    height: 77px;
+    background: #121621;
+    border: 2px solid #fbf0d5;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-family: 'Tai Heritage Pro', sans-serif;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #394149;
+}
+
+/* Pie de página */
+.site-footer {
+    width: 100%;
+    background: #0f1724;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    user-select: none;
+    margin-top: auto;
+    width: 1024px;
+    height: 99px;
+    z-index: 5;
+    position: relative;
+}
+
+/* Contenido del pie de página */
+.footer-contenido p {
+    margin: 4px 0;
+    width: 100%;
+}
